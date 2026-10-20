@@ -57,8 +57,8 @@ NFT trading has the same public data, but no product like this existed for it. F
 | **Collections & NFTs** | Price chart with volume, floor depth, holders, sales, flippers, rarity ranks and trait shares |
 | **Leaders & wallets** | Flip P&L after fees, ROI, win rate, hold time, streaks, market-maker detection |
 | **Practice mode** | Trade at live prices with no wallet, with weekly practice seasons and a leaderboard |
-| **Real trading** | Buy listings, sell into the best offer, list, make item and collection offers, cancel for free, all from your own wallet; in-app Solana buys |
-| **Money** | Balances on every network, move and swap between networks, card deposits, send |
+| **Real trading** | Buy listings and sweep up to 10, sell into the best offer, list, make item, collection and trait offers, cancel, all from your own wallet; in-app Solana buys and sales |
+| **Money & gas** | Balances on every network, move and swap between networks, card deposits, send. Buy or mint with funds on another network in one signature, sell with an empty wallet |
 | **History** | Every buy, sale, listing and offer with its outcome; CSV export |
 | **Launchpad** | Create and mint your own PFP collection on Ethereum, Base or Robinhood Chain ([contracts](contracts/README.md)) |
 | **Alerts** | Follow wallets and get their trades in an inbox and as push notifications |
@@ -77,6 +77,16 @@ NFTs aren't interchangeable the way tokens are, so a straight copy of a token so
 ## Non-custodial by design
 
 FloorFeed never holds your funds or your keys. You sign every transaction in your own wallet (a browser extension, or an embedded wallet you control after signing in with email or Google). Before your wallet ever sees a transaction, FloorFeed simulates it against the chain as you, so a listing that just sold or a short balance is caught without costing gas. Listings and offers are standard OpenSea Seaport orders signed as typed data.
+
+## Gas, handled
+
+Most NFT apps stop you with "not enough ETH on this network" and send you off to bridge. FloorFeed doesn't:
+
+- **Buying, sweeping or minting:** pay from whichever network your money is on, in one signature. The purchase completes on the NFT's network and lands in your wallet; if it can't go through, you're refunded. Built on Relay's cross-chain call execution.
+- **Selling into an offer:** no gas needed. FloorFeed covers the network fee and takes it out of the sale, in the same transaction on Solana.
+- **Listing or making an offer:** one tap brings the little gas the one-time approval needs, or the WETH for an offer straight into your wallet.
+
+Every fee is shown before your wallet opens, and you still sign everything yourself.
 
 ## Architecture
 
